@@ -26,7 +26,7 @@ SOFTWARE.
 #include <stdint.h>
 
 #include <gd.h>
-#include <color.h>
+#include <rgb565.h>
 
 #include "copepod-hal.h"
 
@@ -49,7 +49,7 @@ void pod_hal_putpixel(int16_t x0, int16_t y0, uint16_t color)
  */
 void pod_hal_init(void)
 {
-    img = gdImageCreateTrueColor(FRAMEBUFFER_WIDTH, FRAMEBUFFER_HEIGHT);
+    img = gdImageCreateTrueColor(DISPLAY_WIDTH, DISPLAY_HEIGHT);
 }
 
 /*

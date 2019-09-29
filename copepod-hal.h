@@ -26,10 +26,10 @@ SOFTWARE.
 #define _POD_GD_HAL_H
 
 #include <stdint.h>
-// #include <bitmap.h>
 
-#define FRAMEBUFFER_WIDTH   320
-#define FRAMEBUFFER_HEIGHT  240
+#define DISPLAY_WIDTH   (320)
+#define DISPLAY_HEIGHT  (240)
+#define DISPLAY_DEPTH   (16)
 
 #undef POD_HAS_HAL_BLIT
 #undef POD_HAS_HAL_SCALE_BLIT
