@@ -22,42 +22,25 @@ SOFTWARE.
 
 */
 
-#include <stdio.h>
+#ifndef _POD_GD_HAL_H
+#define _POD_GD_HAL_H
+
 #include <stdint.h>
+#include <stdbool.h>
 
-#include <gd.h>
-#include <rgb565.h>
+#define DISPLAY_WIDTH   (320)
+#define DISPLAY_HEIGHT  (240)
+#define DISPLAY_DEPTH   (16)
 
-#include "copepod-hal.h"
+#undef POD_HAS_HAL_BLIT
+#undef POD_HAS_HAL_SCALE_BLIT
+#undef POD_HAS_HAL_HLINE
+#undef POD_HAS_HAL_VLINE
+#define POD_HAS_HAL_INIT
+#define POD_HAS_HAL_FLUSH
 
-static gdImagePtr img;
-FILE *png;
+void pod_hal_init(void);
+void pod_hal_flush(bool dirty, int16_t x0, int16_t y0, int16_t x1, int16_t y1);
+void pod_hal_putpixel(int16_t x0, int16_t y0, uint16_t color);
 
-/*
- * Putpixel function. This is the only mandatory function which HAL
- * must implement for copepod to be able to draw graphical primitives.
- */
-void pod_hal_putpixel(int16_t x0, int16_t y0, uint16_t color)
-{
-    rgb_t rgb = rgb565_to_rgb888(&color);
-    int32_t gd_color = gdTrueColorAlpha(rgb.r, rgb.g, rgb.b, 0);
-    gdImageSetPixel(img, x0, y0, gd_color);
-}
-
-/*
- * Initializes the GD HAL and set background color to black.
- */
-void pod_hal_init(void)
-{
-    img = gdImageCreateTrueColor(DISPLAY_WIDTH, DISPLAY_HEIGHT);
-}
-
-/*
- * Flushes image to a PNG file.
- */
-void pod_hal_flush(void)
-{
-    png = fopen("test.png", "wb");
-    gdImagePng(img, png);
-    fclose(png);
-}
+#endif /* _POD_GD_HAL_H */
