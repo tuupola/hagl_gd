@@ -56,7 +56,7 @@ void pod_hal_init(void)
  */
 void pod_hal_flush(bool dirty, int16_t x0, int16_t y0, int16_t x1, int16_t y1)
 {
-    png = fopen("test.png", "wb");
+    png = fopen("copepod.png", "wb");
     gdImagePng(img, png);
     fclose(png);
 }
