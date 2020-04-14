@@ -34,6 +34,10 @@ SPDX-License-Identifier: MIT
 #ifndef _POD_GD_HAL_H
 #define _POD_GD_HAL_H
 
+#ifdef __cplusplus
+extern "C" {
+#endif
+
 #include <stdint.h>
 #include <stdbool.h>
 
@@ -52,4 +56,7 @@ void pod_hal_init(void);
 void pod_hal_flush(bool dirty, int16_t x0, int16_t y0, int16_t x1, int16_t y1);
 void pod_hal_putpixel(int16_t x0, int16_t y0, uint16_t color);
 
+#ifdef __cplusplus
+}
+#endif
 #endif /* _POD_GD_HAL_H */
