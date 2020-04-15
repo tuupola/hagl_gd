@@ -45,7 +45,7 @@ FILE *png;
  * Putpixel function. This is the only mandatory function which HAL
  * must implement for copepod to be able to draw graphical primitives.
  */
-void pod_hal_putpixel(int16_t x0, int16_t y0, uint16_t color)
+void pod_hal_put_pixel(int16_t x0, int16_t y0, uint16_t color)
 {
     rgb_t rgb = rgb565_to_rgb888(&color);
     int32_t gd_color = gdTrueColorAlpha(rgb.r, rgb.g, rgb.b, 0);
@@ -63,7 +63,7 @@ void pod_hal_init(void)
 /*
  * Flushes image to a PNG file.
  */
-void pod_hal_flush(bool dirty, int16_t x0, int16_t y0, int16_t x1, int16_t y1)
+void pod_hal_flush()
 {
     png = fopen("copepod.png", "wb");
     gdImagePng(img, png);
