@@ -39,7 +39,6 @@ extern "C" {
 #endif
 
 #include <stdint.h>
-
 #include <bitmap.h>
 
 /* HAL must provide display dimensions and depth. */
@@ -50,13 +49,13 @@ extern "C" {
 /* These are the optional features this HAL provides. */
 #define HAGL_HAS_HAL_INIT
 #define HAGL_HAS_HAL_FLUSH
+#define HAGL_HAS_HAL_CLOSE
 
 /* These are the optional features this HAL does not provide. */
 // #define HAGL_HAS_HAL_HLINE
 // #define HAGL_HAS_HAL_VLINE
 // #define HAGL_HAS_HAL_BLIT
 // #define HAGL_HAS_HAL_SCALE_BLIT
-// #define HAGL_HAS_HAL_CLOSE
 
 /** HAL must provide typedef for colors. This HAL uses RGB565. */
 typedef uint16_t color_t;
@@ -92,6 +91,14 @@ bitmap_t *hagl_hal_init(void);
  * you have finished rendering.
  */
 void hagl_hal_flush();
+
+/**
+ * @brief Close and clean up the HAL
+ *
+ * This is used for HAL implementations which need some cleanup, such
+ * as deallocating memory, to be done when closing the program.
+ */
+void hagl_hal_close();
 
 #ifdef __cplusplus
 }

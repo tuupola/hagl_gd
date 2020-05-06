@@ -69,8 +69,8 @@ int main()
             y = 0.0;
             n = 0;
 
-            xx = x * x;
-            yy = y * y;
+            // xx = x * x;
+            // yy = y * y;
 
             while ((x * x + y * y < 4) && (n != max_iters)) {
                 xtemp = x * x - y * y + x0;
@@ -100,6 +100,7 @@ int main()
     time_spent = (double)(end - start) / CLOCKS_PER_SEC;
     printf("\nGenerated in %g seconds.\n\n", time_spent);
     hagl_flush();
+    hagl_close();
 
     return 0;
 }

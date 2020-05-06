@@ -63,3 +63,9 @@ void hagl_hal_flush()
     gdImagePng(img, png);
     fclose(png);
 }
+
+void hagl_hal_close()
+{
+    /* Release the memory acquired earlier with gdImageCreateTrueColor() */
+    gdImageDestroy(img);
+}
