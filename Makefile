@@ -1,6 +1,16 @@
-all: mandelbroot.c
-	gcc -o mandelbroot mandelbroot.c hagl_hal.c ../hagl/src/hagl.c ../hagl/src/rgb565.c ../hagl/src/fontx2.c ../hagl/src/clip.c ../hagl/src/bitmap.c ../hagl/src/tjpgd.c -I. -I../hagl/include -lgd -lpng -lz -ljpeg -lfreetype -lm -DNO_MENUCONFIG
+CC = gcc
+CFLAGS = -Wall -I./ -I../hagl/include -DNO_MENUCONFIG
+GDFLAGS = -lgd -lpng -lz -ljpeg -lfreetype -lm
 
+src = $(wildcard *.c) \
+      $(wildcard ../hagl/src/*.c)
+
+obj = $(src:.c=.o)
+
+demo: $(obj)
+	$(CC) $(CFLAGS) -o $@ $^ $(LDFLAGS) $(GDFLAGS)
+
+
+.PHONY: clean
 clean:
-	$(RM) *.o
-	$(RM) test
+	rm -f $(obj) mandelbroot
