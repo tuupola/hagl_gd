@@ -39,23 +39,59 @@ extern "C" {
 #endif
 
 #include <stdint.h>
-#include <stdbool.h>
 
 #include <bitmap.h>
 
+/* HAL must provide display dimensions and depth. */
 #define DISPLAY_WIDTH   (320)
 #define DISPLAY_HEIGHT  (240)
 #define DISPLAY_DEPTH   (16)
 
+/* These are the optional features this HAL provides. */
 #define HAGL_HAS_HAL_INIT
 #define HAGL_HAS_HAL_FLUSH
 
-/* This HAL uses RGB565 colors. */
+/* These are the optional features this HAL does not provide. */
+// #define HAGL_HAS_HAL_HLINE
+// #define HAGL_HAS_HAL_VLINE
+// #define HAGL_HAS_HAL_BLIT
+// #define HAGL_HAS_HAL_SCALE_BLIT
+// #define HAGL_HAS_HAL_CLOSE
+
+/** HAL must provide typedef for colors. This HAL uses RGB565. */
 typedef uint16_t color_t;
 
-bitmap_t *hagl_hal_init(void);
-void hagl_hal_flush();
+/**
+ * @brief Draw a single pixel
+ *
+ * This is the only mandatory function HAL must provide.
+ *
+ * @param x0 X coordinate
+ * @param y0 Y coorginate
+ * @param color color
+ */
 void hagl_hal_put_pixel(int16_t x0, int16_t y0, color_t color);
+
+/**
+ * @brief Initialize the HAL
+ *
+ * Initialises all hardware and possible memory buffers needed
+ * to draw and display an image. If HAL uses double or triple
+ * buffering should return a pointer to current back buffer.
+ * This HAL does not use buffering so it returns NULL instead.
+ *
+ * @return pointer to bitmap_t or NULL
+ */
+bitmap_t *hagl_hal_init(void);
+
+/**
+ * @brief Output the image
+ *
+ * This is used for HAL implementations which do not display
+ * the drawn pixels automatically. Call this function always when
+ * you have finished rendering.
+ */
+void hagl_hal_flush();
 
 #ifdef __cplusplus
 }

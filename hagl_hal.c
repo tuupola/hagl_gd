@@ -41,31 +41,24 @@ SPDX-License-Identifier: MIT
 static gdImagePtr img;
 FILE *png;
 
-/*
- * Putpixel function. This is the only mandatory function which HAL
- * must implement for HAGL to be able to draw graphical primitives.
- */
 void hagl_hal_put_pixel(int16_t x0, int16_t y0, color_t color)
 {
+    /* GD uses RGBA888 internally so lets convert the color. */
     rgb_t rgb = rgb565_to_rgb888(&color);
     int32_t gd_color = gdTrueColorAlpha(rgb.r, rgb.g, rgb.b, 0);
     gdImageSetPixel(img, x0, y0, gd_color);
 }
 
-/*
- * Initializes the GD HAL and set background color to black.
- */
 bitmap_t *hagl_hal_init(void)
 {
     img = gdImageCreateTrueColor(DISPLAY_WIDTH, DISPLAY_HEIGHT);
+    /* This HAL does not use double buffering so we return NULL. */
     return NULL;
 }
 
-/*
- * Flushes image to a PNG file.
- */
 void hagl_hal_flush()
 {
+    /* Output the current frame as png file. */
     png = fopen("hagl.png", "wb");
     gdImagePng(img, png);
     fclose(png);
