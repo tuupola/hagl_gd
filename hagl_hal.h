@@ -24,15 +24,15 @@ SOFTWARE.
 
 -cut-
 
-This file is part of the GD HAL for Copepod graphics library:
-https://github.com/tuupola/copepod_libgd
+This file is part of the GD HAL for the HAGLS graphics library:
+https://github.com/tuupola/hagl_gd
 
 SPDX-License-Identifier: MIT
 
 */
 
-#ifndef _POD_GD_HAL_H
-#define _POD_GD_HAL_H
+#ifndef _HAGL_GD_HAL_H
+#define _HAGL_GD_HAL_H
 
 #ifdef __cplusplus
 extern "C" {
@@ -41,22 +41,20 @@ extern "C" {
 #include <stdint.h>
 #include <stdbool.h>
 
+#include <bitmap.h>
+
 #define DISPLAY_WIDTH   (320)
 #define DISPLAY_HEIGHT  (240)
 #define DISPLAY_DEPTH   (16)
 
-#undef POD_HAS_HAL_BLIT
-#undef POD_HAS_HAL_SCALE_BLIT
-#undef POD_HAS_HAL_HLINE
-#undef POD_HAS_HAL_VLINE
-#define POD_HAS_HAL_INIT
-#define POD_HAS_HAL_FLUSH
+#define HAGL_HAS_HAL_INIT
+#define HAGL_HAS_HAL_FLUSH
 
-void pod_hal_init(void);
-void pod_hal_flush();
-void pod_hal_put_pixel(int16_t x0, int16_t y0, uint16_t color);
+bitmap_t *hagl_hal_init(void);
+void hagl_hal_flush();
+void hagl_hal_put_pixel(int16_t x0, int16_t y0, uint16_t color);
 
 #ifdef __cplusplus
 }
 #endif
-#endif /* _POD_GD_HAL_H */
+#endif /* _HAGL_GD_HAL_H */

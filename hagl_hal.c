@@ -24,8 +24,8 @@ SOFTWARE.
 
 -cut-
 
-This file is part of the GD HAL for Copepod graphics library:
-https://github.com/tuupola/copepod_libgd
+This file is part of the GD HAL for the HAGLS graphics library:
+https://github.com/tuupola/hagl_gd
 
 SPDX-License-Identifier: MIT
 
@@ -36,16 +36,16 @@ SPDX-License-Identifier: MIT
 #include <gd.h>
 #include <rgb565.h>
 
-#include "copepod_hal.h"
+#include "hagl_hal.h"
 
 static gdImagePtr img;
 FILE *png;
 
 /*
  * Putpixel function. This is the only mandatory function which HAL
- * must implement for copepod to be able to draw graphical primitives.
+ * must implement for HAGL to be able to draw graphical primitives.
  */
-void pod_hal_put_pixel(int16_t x0, int16_t y0, uint16_t color)
+void hagl_hal_put_pixel(int16_t x0, int16_t y0, uint16_t color)
 {
     rgb_t rgb = rgb565_to_rgb888(&color);
     int32_t gd_color = gdTrueColorAlpha(rgb.r, rgb.g, rgb.b, 0);
@@ -55,17 +55,18 @@ void pod_hal_put_pixel(int16_t x0, int16_t y0, uint16_t color)
 /*
  * Initializes the GD HAL and set background color to black.
  */
-void pod_hal_init(void)
+bitmap_t *hagl_hal_init(void)
 {
     img = gdImageCreateTrueColor(DISPLAY_WIDTH, DISPLAY_HEIGHT);
+    return NULL;
 }
 
 /*
  * Flushes image to a PNG file.
  */
-void pod_hal_flush()
+void hagl_hal_flush()
 {
-    png = fopen("copepod.png", "wb");
+    png = fopen("hagl.png", "wb");
     gdImagePng(img, png);
     fclose(png);
 }

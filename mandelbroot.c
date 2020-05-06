@@ -29,9 +29,9 @@ SPDX-License-Identifier: MIT-0
 #include <stdint.h>
 #include <stdio.h>
 #include <stdlib.h>
-#include <copepod.h>
+#include <hagl_hal.h>
+#include <hagl.h>
 
-#include "copepod_hal.h"
 
 int main()
 {
@@ -57,7 +57,7 @@ int main()
     clock_t end;
     double time_spent;
 
-    pod_init();
+    hagl_init();
 
     start = clock();
 
@@ -89,9 +89,9 @@ int main()
             // }
 
             if (n < max_iters) {
-                pod_put_pixel(px, py, n);
+                hagl_put_pixel(px, py, n);
             } else {
-                pod_put_pixel(px, py, 0);
+                hagl_put_pixel(px, py, 0);
             }
         }
     }
@@ -99,7 +99,7 @@ int main()
     end = clock();
     time_spent = (double)(end - start) / CLOCKS_PER_SEC;
     printf("\nGenerated in %g seconds.\n\n", time_spent);
-    pod_flush();
+    hagl_flush();
 
     return 0;
 }
