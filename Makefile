@@ -7,7 +7,7 @@ src = $(wildcard *.c) \
 
 obj = $(src:.c=.o)
 
-demo: $(obj)
+mandelbroot: $(obj)
 	$(CC) $(CFLAGS) -o $@ $^ $(LDFLAGS) $(GDFLAGS)
 
 

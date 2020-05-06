@@ -24,7 +24,7 @@ SOFTWARE.
 
 -cut-
 
-This file is part of the GD HAL for the HAGLS graphics library:
+This file is part of the GD HAL for the HAGL graphics library:
 https://github.com/tuupola/hagl_gd
 
 SPDX-License-Identifier: MIT

@@ -29,9 +29,9 @@ SPDX-License-Identifier: MIT-0
 #include <stdint.h>
 #include <stdio.h>
 #include <stdlib.h>
-#include <hagl_hal.h>
-#include <hagl.h>
 
+#include "hagl_hal.h"
+#include "hagl.h"
 
 int main()
 {
@@ -47,8 +47,6 @@ int main()
     double y;
     double x0;
     double y0;
-    double xx;
-    double yy;
     double xtemp;
 
     double zoom = 1.0;
@@ -69,24 +67,12 @@ int main()
             y = 0.0;
             n = 0;
 
-            // xx = x * x;
-            // yy = y * y;
-
             while ((x * x + y * y < 4) && (n != max_iters)) {
                 xtemp = x * x - y * y + x0;
                 y = 2.0 * x * y + y0;
                 x = xtemp;
                 n++;
             }
-
-            // while ((xx + yy < 4) && (n != max_iters)) {
-            //     y = (x + x) * y + y0;
-            //     x = xx - yy + x0;
-
-            //     xx = x * x;
-            //     yy = y * y;
-            //     n++;
-            // }
 
             if (n < max_iters) {
                 hagl_put_pixel(px, py, n);
