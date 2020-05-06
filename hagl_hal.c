@@ -45,7 +45,7 @@ FILE *png;
  * Putpixel function. This is the only mandatory function which HAL
  * must implement for HAGL to be able to draw graphical primitives.
  */
-void hagl_hal_put_pixel(int16_t x0, int16_t y0, uint16_t color)
+void hagl_hal_put_pixel(int16_t x0, int16_t y0, color_t color)
 {
     rgb_t rgb = rgb565_to_rgb888(&color);
     int32_t gd_color = gdTrueColorAlpha(rgb.r, rgb.g, rgb.b, 0);
