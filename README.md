@@ -10,7 +10,7 @@ This is a [GD](https://libgd.github.io/) HAL for the lightweight hardware agnost
 ```
 $ git clone git@github.com:tuupola/hagl.git
 $ git clone git@github.com:tuupola/hagl_gd.git
-$ cd hal_gd
+$ cd hagl_gd/example
 $ make && ./mandelbroot && open hagl.png
 ```
 
