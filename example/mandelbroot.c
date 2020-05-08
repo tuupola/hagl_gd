@@ -40,22 +40,24 @@ int main()
     uint16_t max_iters = 1024;
 
     uint16_t n = 0;
-    uint16_t px;
-    uint16_t py;
+    uint16_t px, py;
 
     double x;
     double y;
     double x0;
     double y0;
     double xtemp;
-
     double zoom = 1.0;
 
     clock_t start;
     clock_t end;
     double time_spent;
 
+<<<<<<< HEAD
     size_t bytes;
+=======
+    color_t color;
+>>>>>>> Change example to use hagl_color()
 
     hagl_init();
 
@@ -76,8 +78,9 @@ int main()
                 n++;
             }
 
+            color = hagl_color(0, n * 16, n * 16);
             if (n < max_iters) {
-                hagl_put_pixel(px, py, n);
+                hagl_put_pixel(px, py, color);
             } else {
                 hagl_put_pixel(px, py, 0);
             }
