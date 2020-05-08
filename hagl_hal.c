@@ -43,9 +43,11 @@ FILE *png;
 
 void hagl_hal_put_pixel(int16_t x0, int16_t y0, color_t color)
 {
-    /* GD uses RGBA888 internally so lets convert the color. */
-    rgb_t rgb = rgb565_to_rgb888(&color);
-    int32_t gd_color = gdTrueColorAlpha(rgb.r, rgb.g, rgb.b, 0);
+    uint8_t r = (color >> 16) & 0xff;
+    uint8_t g = (color >> 8) & 0xff;
+    uint8_t b = (color) & 0xff;
+
+    int32_t gd_color = gdTrueColorAlpha(r, g, b, 0);
     gdImageSetPixel(img, x0, y0, gd_color);
 }
 
