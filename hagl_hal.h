@@ -41,9 +41,15 @@ extern "C" {
 #include <stdint.h>
 #include <bitmap.h>
 
-/* HAL must provide display dimensions and depth. */
+/* HAL must provide display dimensions and depth. This HAL */
+/* defaults to 320x240. Alternative dimensios can be passed */
+/* using compiler flags. */
+#ifndef DISPLAY_WIDTH
 #define DISPLAY_WIDTH   (320)
+#endif
+#ifndef DISPLAY_HEIGHT
 #define DISPLAY_HEIGHT  (240)
+#endif
 #define DISPLAY_DEPTH   (32)
 
 /* These are the optional features this HAL provides. */
