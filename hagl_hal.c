@@ -56,12 +56,13 @@ bitmap_t *hagl_hal_init(void)
     return NULL;
 }
 
-void hagl_hal_flush()
+size_t hagl_hal_flush()
 {
     /* Output the current frame as png file. */
     png = fopen("hagl.png", "wb");
     gdImagePng(img, png);
     fclose(png);
+    return DISPLAY_WIDTH * DISPLAY_HEIGHT * DISPLAY_DEPTH / 8;
 }
 
 void hagl_hal_close()

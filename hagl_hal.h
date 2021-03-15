@@ -89,8 +89,10 @@ bitmap_t *hagl_hal_init(void);
  * This is used for HAL implementations which do not display
  * the drawn pixels automatically. Call this function always when
  * you have finished rendering.
+ *
+ * @return number of bytes written
  */
-void hagl_hal_flush();
+size_t hagl_hal_flush();
 
 /**
  * @brief Close and clean up the HAL
