@@ -3,7 +3,7 @@
 This is a [GD](https://libgd.github.io/) HAL for the lightweight hardware agnostic graphics library [HAGL](https://github.com/tuupola/hagl). This repository serves as an example on how to create a simple HAL.
 
 
-[![Software License](https://img.shields.io/badge/license-MIT-brightgreen.svg?style=flat-square)](LICENSE.md)
+[![Software License](https://img.shields.io/badge/license-MIT-brightgreen.svg?style=flat-square)](LICENSE)
 
 # Demo
 
@@ -17,4 +17,4 @@ $ make clean && make palette && ./palette && open hagl.png
 
 ## License
 
-The MIT License (MIT). Please see [License File](LICENSE.txt) for more information.
+The MIT License (MIT). Please see [License File](LICENSE) for more information.
