@@ -50,7 +50,7 @@ extern "C" {
 #ifndef DISPLAY_HEIGHT
 #define DISPLAY_HEIGHT  (240)
 #endif
-#define DISPLAY_DEPTH   (32)
+#define DISPLAY_DEPTH   (24)
 
 /* These are the optional features this HAL provides. */
 #define HAGL_HAS_HAL_INIT
