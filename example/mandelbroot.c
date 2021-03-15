@@ -53,11 +53,8 @@ int main()
     clock_t end;
     double time_spent;
 
-<<<<<<< HEAD
     size_t bytes;
-=======
     color_t color;
->>>>>>> Change example to use hagl_color()
 
     hagl_init();
 
