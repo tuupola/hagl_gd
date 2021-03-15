@@ -55,6 +55,8 @@ int main()
     clock_t end;
     double time_spent;
 
+    size_t bytes;
+
     hagl_init();
 
     start = clock();
@@ -84,8 +86,8 @@ int main()
 
     end = clock();
     time_spent = (double)(end - start) / CLOCKS_PER_SEC;
-    printf("\nGenerated in %g seconds.\n\n", time_spent);
-    hagl_flush();
+    bytes = hagl_flush();
+    printf("\nGenerated %zu bytes in %g seconds.\n\n", bytes, time_spent);
     hagl_close();
 
     return 0;
