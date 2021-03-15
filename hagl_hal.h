@@ -58,12 +58,6 @@ extern "C" {
 #define HAGL_HAS_HAL_CLOSE
 #define HAGL_HAS_HAL_COLOR
 
-/* These are the optional features this HAL does not provide. */
-// #define HAGL_HAS_HAL_HLINE
-// #define HAGL_HAS_HAL_VLINE
-// #define HAGL_HAS_HAL_BLIT
-// #define HAGL_HAS_HAL_SCALE_BLIT
-
 /** HAL must provide typedef for colors. This HAL uses RGB888. */
 typedef uint32_t color_t;
 
