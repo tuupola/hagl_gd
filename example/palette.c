@@ -35,53 +35,36 @@ SPDX-License-Identifier: MIT-0
 
 int main()
 {
-    uint16_t max_x = DISPLAY_WIDTH;
-    uint16_t max_y = DISPLAY_HEIGHT;
-    uint16_t max_iters = 1024;
-
-    uint16_t n = 0;
-    uint16_t px, py;
-
-    double x;
-    double y;
-    double x0;
-    double y0;
-    double xtemp;
-    double zoom = 1.0;
-
-    clock_t start;
-    clock_t end;
-    double time_spent;
-
-    size_t bytes;
     color_t color;
+    uint16_t x, y, r, g, b, bx, by;
+    clock_t start, end;
+    double time_spent;
+    size_t bytes;
 
     hagl_init();
 
+    x = 1;
+    y = 1;
+    by = 0;
+    bx = 0;
+
     start = clock();
 
-    for (py = 1; py <= max_y; py++)  {
-        for (px = 1; px <= max_x; px++)  {
-            x0 = (((float) px) / ((float) max_x) - 0.5) / zoom * 3.0 - 0.7;
-            y0 = (((float) py) / ((float) max_y) - 0.5) / zoom * 3.0;
-            x = 0.0;
-            y = 0.0;
-            n = 0;
-
-            while ((x * x + y * y < 4) && (n != max_iters)) {
-                xtemp = x * x - y * y + x0;
-                y = 2.0 * x * y + y0;
-                x = xtemp;
-                n++;
+    for (r = 0; r < 256; r++) {
+        for (g = 0; g < 256; g++) {
+            for (b = 0; b < 256; b++) {
+                color = hagl_color(r, g, b);
+                hagl_put_pixel(x + bx * 256, y + by * 256, color);
+                x++;
             }
-
-            color = hagl_color(0, n * 16, n * 16);
-            if (n < max_iters) {
-                hagl_put_pixel(px, py, color);
-            } else {
-                hagl_put_pixel(px, py, 0);
-            }
+            y++;
+            x = 0;
         }
+        bx = (bx + 1) % 16;
+        if (0 == bx) {
+            by++;
+        }
+        y = 0;
     }
 
     end = clock();

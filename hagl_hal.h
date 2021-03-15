@@ -41,24 +41,25 @@ extern "C" {
 #include <stdint.h>
 #include <bitmap.h>
 
-/* HAL must provide display dimensions and depth. */
+/* HAL must provide display dimensions and depth. This HAL */
+/* defaults to 320x240. Alternative dimensios can be passed */
+/* using compiler flags. */
+#ifndef DISPLAY_WIDTH
 #define DISPLAY_WIDTH   (320)
+#endif
+#ifndef DISPLAY_HEIGHT
 #define DISPLAY_HEIGHT  (240)
-#define DISPLAY_DEPTH   (16)
+#endif
+#define DISPLAY_DEPTH   (24)
 
 /* These are the optional features this HAL provides. */
 #define HAGL_HAS_HAL_INIT
 #define HAGL_HAS_HAL_FLUSH
 #define HAGL_HAS_HAL_CLOSE
+#define HAGL_HAS_HAL_COLOR
 
-/* These are the optional features this HAL does not provide. */
-// #define HAGL_HAS_HAL_HLINE
-// #define HAGL_HAS_HAL_VLINE
-// #define HAGL_HAS_HAL_BLIT
-// #define HAGL_HAS_HAL_SCALE_BLIT
-
-/** HAL must provide typedef for colors. This HAL uses RGB565. */
-typedef uint16_t color_t;
+/** HAL must provide typedef for colors. This HAL uses RGB888. */
+typedef uint32_t color_t;
 
 /**
  * @brief Draw a single pixel
@@ -101,6 +102,16 @@ size_t hagl_hal_flush();
  * as deallocating memory, to be done when closing the program.
  */
 void hagl_hal_close();
+
+/**
+ * @brief Convert RGB to HAL color type
+ *
+ * This is used for HAL implementations which use some other pixel
+ * format than RGB565.
+ */
+static inline color_t hagl_hal_color(uint8_t r, uint8_t g, uint8_t b) {
+    return (r << 16) | (g << 8) | (b);
+}
 
 #ifdef __cplusplus
 }

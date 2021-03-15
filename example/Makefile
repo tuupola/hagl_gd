@@ -1,17 +1,24 @@
 CC = gcc
-CFLAGS = -Wall -I../ -I../../hagl/include -DNO_MENUCONFIG
 GDFLAGS = -lgd -lpng -lz -ljpeg -lfreetype -lm
+mandelbroot: CFLAGS = -Wall -I../ -I../../hagl/include -DNO_MENUCONFIG
+palette: CFLAGS = -Wall -I../ -I../../hagl/include -DNO_MENUCONFIG -DDISPLAY_WIDTH=4080 -DDISPLAY_HEIGHT=4080
 
-src = $(wildcard *.c) \
-      $(wildcard ../*.c) \
+PALETTEFLAGS =
+
+src = $(wildcard ../*.c) \
       $(wildcard ../../hagl/src/*.c)
 
 obj = $(src:.c=.o)
 
-mandelbroot: $(obj)
+all: palette mandelbroot
+
+mandelbroot: mandelbroot.c $(obj)
 	$(CC) $(CFLAGS) -o $@ $^ $(LDFLAGS) $(GDFLAGS)
+
+palette: palette.c $(obj)
+	$(CC) $(PALETTEFLAGS) $(CFLAGS) -o $@ $^ $(LDFLAGS) $(GDFLAGS)
 
 
 .PHONY: clean
 clean:
-	rm -f $(obj) mandelbroot hagl.png
+	rm -f $(obj) mandelbroot palette *.png *.o
