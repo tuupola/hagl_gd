@@ -1,7 +1,7 @@
 CC = gcc
 GDFLAGS = -lgd -lpng -lz -ljpeg -lfreetype -lm
-mandelbroot: CFLAGS = -Wall -I../ -I../../hagl/include -DNO_MENUCONFIG
-palette: CFLAGS = -Wall -I../ -I../../hagl/include -DNO_MENUCONFIG -DDISPLAY_WIDTH=4080 -DDISPLAY_HEIGHT=4080
+mandelbroot: CFLAGS = -Wall -I../ -I../../hagl/include
+palette: CFLAGS = -Wall -I../ -I../../hagl/include -DDISPLAY_WIDTH=4080 -DDISPLAY_HEIGHT=4080
 
 PALETTEFLAGS =
 
