@@ -31,49 +31,19 @@ SPDX-License-Identifier: MIT
 
 */
 
-#ifndef _HAGL_GD_HAL_H
-#define _HAGL_GD_HAL_H
+#ifndef _HAGL_GD_HAL_COLOR_H
+#define _HAGL_GD_HAL_COLOR_H
 
 #ifdef __cplusplus
 extern "C" {
 #endif
 
 #include <stdint.h>
-#include <backend.h>
 
-#include "hagl_hal_color.h"
-
-/* HAL must provide display dimensions and depth. This HAL */
-/* defaults to 320x240. Alternative dimensions can be passed */
-/* using compiler flags. */
-#ifndef DISPLAY_WIDTH
-#define DISPLAY_WIDTH   (320)
-#endif
-#ifndef DISPLAY_HEIGHT
-#define DISPLAY_HEIGHT  (240)
-#endif
-#define DISPLAY_DEPTH   (24)
-
-/** HAL must provide typedef for colors. This HAL uses RGB888. */
+/** HAL must provide typedef for colors. This HAL uses RGB565. */
 typedef uint32_t color_t;
-
-/**
- * @brief Initialize the backend
- */
-void
-hagl_hal_init(hagl_backend_t *backend);
-
-/**
- * @brief Convert RGB to HAL color type
- *
- * This is used for HAL implementations which use some other pixel
- * format than RGB565.
- */
-// static inline color_t hagl_hal_color(uint8_t r, uint8_t g, uint8_t b) {
-//     return (r << 16) | (g << 8) | (b);
-// }
 
 #ifdef __cplusplus
 }
 #endif
-#endif /* _HAGL_GD_HAL_H */
+#endif /* _HAGL_GD_HAL_COLOR_H */

@@ -35,13 +35,15 @@ SPDX-License-Identifier: MIT
 #include <stdint.h>
 #include <gd.h>
 #include <rgb565.h>
+#include <backend.h>
 
 #include "hagl_hal.h"
 
 static gdImagePtr img;
 FILE *png;
 
-void hagl_hal_put_pixel(int16_t x0, int16_t y0, color_t color)
+static void
+put_pixel(void *self, int16_t x0, int16_t y0, color_t color)
 {
     uint8_t r = (color >> 16) & 0xff;
     uint8_t g = (color >> 8) & 0xff;
@@ -51,14 +53,9 @@ void hagl_hal_put_pixel(int16_t x0, int16_t y0, color_t color)
     gdImageSetPixel(img, x0, y0, gd_color);
 }
 
-bitmap_t *hagl_hal_init(void)
-{
-    img = gdImageCreateTrueColor(DISPLAY_WIDTH, DISPLAY_HEIGHT);
-    /* This HAL does not use double buffering so we return NULL. */
-    return NULL;
-}
 
-size_t hagl_hal_flush()
+static size_t
+flush(void *self)
 {
     /* Output the current frame as png file. */
     png = fopen("hagl.png", "wb");
@@ -67,8 +64,24 @@ size_t hagl_hal_flush()
     return DISPLAY_WIDTH * DISPLAY_HEIGHT * DISPLAY_DEPTH / 8;
 }
 
-void hagl_hal_close()
+static void
+close(void *self)
 {
     /* Release the memory acquired earlier with gdImageCreateTrueColor() */
     gdImageDestroy(img);
+}
+
+void
+hagl_hal_init(hagl_backend_t *backend)
+{
+    img = gdImageCreateTrueColor(DISPLAY_WIDTH, DISPLAY_HEIGHT);
+
+    backend->width = DISPLAY_WIDTH;
+    backend->height = DISPLAY_HEIGHT;
+    backend->depth = DISPLAY_DEPTH;
+    backend->put_pixel = put_pixel;
+
+    backend->flush = flush;
+    backend->close = close;
+
 }
