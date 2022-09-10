@@ -45,14 +45,8 @@ FILE *png;
 static void
 put_pixel(void *self, int16_t x0, int16_t y0, color_t color)
 {
-    uint8_t r = (color >> 16) & 0xff;
-    uint8_t g = (color >> 8) & 0xff;
-    uint8_t b = (color) & 0xff;
-
-    int32_t gd_color = gdTrueColorAlpha(r, g, b, 0);
-    gdImageSetPixel(img, x0, y0, gd_color);
+    gdImageSetPixel(img, x0, y0, color);
 }
-
 
 static size_t
 flush(void *self)
@@ -71,6 +65,12 @@ close(void *self)
     gdImageDestroy(img);
 }
 
+static color_t
+color(void *self, uint8_t r, uint8_t g, uint8_t b) {
+    // return gdTrueColor(r, g, b);
+    return (r << 16) | (g << 8) | (b);
+}
+
 void
 hagl_hal_init(hagl_backend_t *backend)
 {
@@ -80,6 +80,7 @@ hagl_hal_init(hagl_backend_t *backend)
     backend->height = DISPLAY_HEIGHT;
     backend->depth = DISPLAY_DEPTH;
     backend->put_pixel = put_pixel;
+    backend->color = color;
 
     backend->flush = flush;
     backend->close = close;
