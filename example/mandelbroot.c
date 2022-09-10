@@ -76,7 +76,7 @@ int main()
                 n++;
             }
 
-            color = hagl_color(0, n * 16, n * 16);
+            color = hagl_color(window, 0, n * 16, n * 16);
             if (n < max_iters) {
                 hagl_put_pixel(window, px, py, color);
             } else {

@@ -54,7 +54,7 @@ int main()
     for (r = 0; r < 256; r++) {
         for (g = 0; g < 256; g++) {
             for (b = 0; b < 256; b++) {
-                color = hagl_color(r, g, b);
+                color = hagl_color(window, r, g, b);
                 hagl_put_pixel(window, x + bx * 256, y + by * 256, color);
                 x++;
             }
