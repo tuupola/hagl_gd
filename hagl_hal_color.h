@@ -31,58 +31,19 @@ SPDX-License-Identifier: MIT
 
 */
 
-#include <stdio.h>
+#ifndef _HAGL_GD_HAL_COLOR_H
+#define _HAGL_GD_HAL_COLOR_H
+
+#ifdef __cplusplus
+extern "C" {
+#endif
+
 #include <stdint.h>
-#include <gd.h>
-#include <rgb565.h>
-#include <hagl/backend.h>
 
-#include "hagl_hal.h"
+/** HAL must provide typedef for colors. This HAL uses RGB565. */
+typedef uint32_t color_t;
 
-static gdImagePtr img;
-FILE *png;
-
-static void
-put_pixel(void *self, int16_t x0, int16_t y0, color_t color)
-{
-    gdImageSetPixel(img, x0, y0, color);
+#ifdef __cplusplus
 }
-
-static size_t
-flush(void *self)
-{
-    /* Output the current frame as png file. */
-    png = fopen("hagl.png", "wb");
-    gdImagePng(img, png);
-    fclose(png);
-    return DISPLAY_WIDTH * DISPLAY_HEIGHT * DISPLAY_DEPTH / 8;
-}
-
-static void
-close(void *self)
-{
-    /* Release the memory acquired earlier with gdImageCreateTrueColor() */
-    gdImageDestroy(img);
-}
-
-static color_t
-color(void *self, uint8_t r, uint8_t g, uint8_t b) {
-    // return gdTrueColor(r, g, b);
-    return (r << 16) | (g << 8) | (b);
-}
-
-void
-hagl_hal_init(hagl_backend_t *backend)
-{
-    img = gdImageCreateTrueColor(DISPLAY_WIDTH, DISPLAY_HEIGHT);
-
-    backend->width = DISPLAY_WIDTH;
-    backend->height = DISPLAY_HEIGHT;
-    backend->depth = DISPLAY_DEPTH;
-    backend->put_pixel = put_pixel;
-    backend->color = color;
-
-    backend->flush = flush;
-    backend->close = close;
-
-}
+#endif
+#endif /* _HAGL_GD_HAL_COLOR_H */

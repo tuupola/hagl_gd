@@ -30,8 +30,7 @@ SPDX-License-Identifier: MIT-0
 #include <stdio.h>
 #include <stdlib.h>
 
-#include "hagl_hal.h"
-#include "hagl.h"
+#include <hagl.h>
 
 int main()
 {
@@ -56,7 +55,7 @@ int main()
     size_t bytes;
     color_t color;
 
-    hagl_init();
+    hagl_backend_t *window = hagl_init();
 
     start = clock();
 
@@ -75,21 +74,20 @@ int main()
                 n++;
             }
 
-            color = hagl_color(0, n * 16, n * 16);
+            color = hagl_color(window, 0, n * 16, n * 16);
             if (n < max_iters) {
-                hagl_put_pixel(px, py, color);
+                hagl_put_pixel(window, px, py, color);
             } else {
-                hagl_put_pixel(px, py, 0);
+                hagl_put_pixel(window, px, py, 0);
             }
         }
     }
 
     end = clock();
     time_spent = (double)(end - start) / CLOCKS_PER_SEC;
-    bytes = hagl_flush();
+    bytes = hagl_flush(window);
     printf("\nGenerated %zu bytes in %g seconds.\n\n", bytes, time_spent);
-    hagl_close();
+    hagl_close(window);
 
     return 0;
 }
-
