@@ -30,9 +30,7 @@ SPDX-License-Identifier: MIT-0
 #include <stdio.h>
 #include <stdlib.h>
 
-#include "hagl_hal.h"
-#include "hagl.h"
-#include "backend.h"
+#include <hagl.h>
 
 int main()
 {

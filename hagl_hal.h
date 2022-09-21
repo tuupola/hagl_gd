@@ -39,9 +39,8 @@ extern "C" {
 #endif
 
 #include <stdint.h>
-#include <backend.h>
-
-#include "hagl_hal_color.h"
+#include <hagl/backend.h>
+#include <hagl/color.h>
 
 /* HAL must provide display dimensions and depth. This HAL */
 /* defaults to 320x240. Alternative dimensions can be passed */
