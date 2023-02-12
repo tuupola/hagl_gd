@@ -53,7 +53,7 @@ int main()
     double time_spent;
 
     size_t bytes;
-    color_t color;
+    hagl_color_t color;
 
     hagl_backend_t *window = hagl_init();
 

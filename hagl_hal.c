@@ -43,7 +43,7 @@ static gdImagePtr img;
 FILE *png;
 
 static void
-put_pixel(void *self, int16_t x0, int16_t y0, color_t color)
+put_pixel(void *self, int16_t x0, int16_t y0, hagl_color_t color)
 {
     gdImageSetPixel(img, x0, y0, color);
 }
@@ -65,7 +65,7 @@ close(void *self)
     gdImageDestroy(img);
 }
 
-static color_t
+static hagl_color_t
 color(void *self, uint8_t r, uint8_t g, uint8_t b) {
     // return gdTrueColor(r, g, b);
     return (r << 16) | (g << 8) | (b);
