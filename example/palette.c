@@ -33,7 +33,7 @@ SPDX-License-Identifier: MIT-0
 
 int main()
 {
-    color_t color;
+    hagl_color_t color;
     uint16_t x, y, r, g, b, bx, by;
     clock_t start, end;
     double time_spent;

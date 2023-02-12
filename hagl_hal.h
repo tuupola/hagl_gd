@@ -54,7 +54,7 @@ extern "C" {
 #define DISPLAY_DEPTH   (24)
 
 /** HAL must provide typedef for colors. This HAL uses RGB888. */
-typedef uint32_t color_t;
+typedef uint32_t hagl_color_t;
 
 /**
  * @brief Initialize the backend
@@ -68,7 +68,7 @@ hagl_hal_init(hagl_backend_t *backend);
  * This is used for HAL implementations which use some other pixel
  * format than RGB565.
  */
-// static inline color_t hagl_hal_color(uint8_t r, uint8_t g, uint8_t b) {
+// static inline hagl_color_t hagl_hal_color(uint8_t r, uint8_t g, uint8_t b) {
 //     return (r << 16) | (g << 8) | (b);
 // }
 
